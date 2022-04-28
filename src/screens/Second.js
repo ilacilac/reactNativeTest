@@ -1,8 +1,12 @@
 import React from 'react';
-import {Text} from 'react-native';
+import {WebView} from 'react-native-webview';
 
 function Second() {
-  return <Text>Second</Text>;
+  return (
+    <>
+      <WebView source={{url: 'https://www.naver.com/'}} />
+    </>
+  );
 }
 
 export default Second;

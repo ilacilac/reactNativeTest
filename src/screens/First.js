@@ -34,7 +34,6 @@ function First() {
     <>
       {/* <AppNavigator /> */}
       <Tabs />
-      <Text>1</Text>
     </>
   );
 }
