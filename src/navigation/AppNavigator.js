@@ -31,8 +31,7 @@ function Tabs() {
 
 export default function AppNavigator() {
   return (
-    <NavigationContainer>
-      <Tabs />
-    </NavigationContainer>
+    <Tabs />
+    // </NavigationContainer>
   );
 }
