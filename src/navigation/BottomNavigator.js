@@ -4,6 +4,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Text} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import News from '../screens/News';
+import SelectCategoryPage from '../screens/SelectCategoryPage';
 
 const Tab = createBottomTabNavigator();
 
@@ -14,8 +15,15 @@ function SettingScreen() {
   return <Text>Setting</Text>;
 }
 
+// todo
+// asyncStorage - getCategories ? new : selectCategories
+
+const isCategories = false;
+
 function BottomNavigator() {
-  return (
+  return isCategories ? (
+    <SelectCategoryPage />
+  ) : (
     <Tab.Navigator initialRouteName="News">
       <Tab.Screen
         name="News"
