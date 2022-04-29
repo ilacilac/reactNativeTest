@@ -25,7 +25,7 @@ function Search() {
   return (
     <>
       <WebView
-        source={{url: 'https://www.naver.com/'}}
+        source={{url: 'http://localhost:3000/list/123'}}
         onLoadEnd={handleEndLoading}
         onMessage={handleOnMessage}
         ref={handleSetRef}
