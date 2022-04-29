@@ -1,13 +1,12 @@
 import React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 
 import Second from '../screens/Second';
 import Third from '../screens/Third';
-import {Text} from 'react-native';
 
 const Tab = createMaterialTopTabNavigator();
 
+// todo : GNB API 요청 후 뿌려주기
 function Tabs() {
   return (
     <Tab.Navigator
@@ -30,12 +29,7 @@ function Tabs() {
 }
 
 function First() {
-  return (
-    <>
-      {/* <AppNavigator /> */}
-      <Tabs />
-    </>
-  );
+  return <Tabs />;
 }
 
 export default First;

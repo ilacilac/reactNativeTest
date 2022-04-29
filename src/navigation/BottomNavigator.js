@@ -2,14 +2,10 @@ import React from 'react';
 
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Text} from 'react-native';
-import {SafeAreaView} from 'react-native-safe-area-context';
 import First from '../screens/First';
 
 const Tab = createBottomTabNavigator();
 
-function HomeScreen() {
-  return <Text>News</Text>;
-}
 function SearchScreen() {
   return <Text>Search</Text>;
 }
