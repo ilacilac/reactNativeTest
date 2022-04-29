@@ -1,7 +1,7 @@
 import React, {useRef} from 'react';
 import {WebView} from 'react-native-webview';
 
-function Second() {
+function Search() {
   // 웹뷰와 rn과의 소통은 아래의 ref 값을 이용하여 이루어집니다.
   let webviewRef = useRef();
 
@@ -34,4 +34,4 @@ function Second() {
   );
 }
 
-export default Second;
+export default Search;
