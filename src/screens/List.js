@@ -1,8 +1,7 @@
 import React, {useRef} from 'react';
 import {WebView} from 'react-native-webview';
 
-function Search({code}) {
-  console.log('code', code);
+function List({code}) {
   // 웹뷰와 rn과의 소통은 아래의 ref 값을 이용하여 이루어집니다.
   // https://kyounghwan01.github.io/blog/React/react-native/react-native-webview/#rn%E1%84%8B%E1%85%A6%E1%84%89%E1%85%A5-webview%E1%84%85%E1%85%A9-%E1%84%83%E1%85%A6%E1%84%8B%E1%85%B5%E1%84%90%E1%85%A5-%E1%84%89%E1%85%A9%E1%86%BC%E1%84%89%E1%85%B5%E1%86%AB
   let webviewRef = useRef();
@@ -43,4 +42,4 @@ function Search({code}) {
   );
 }
 
-export default Search;
+export default List;

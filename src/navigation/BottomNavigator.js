@@ -1,10 +1,11 @@
-import React from 'react';
+import React, {useContext} from 'react';
 
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Text} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import News from '../screens/News';
 import SelectCategoryPage from '../screens/SelectCategoryPage';
+import {IntroContext} from '../context/intro';
 
 const Tab = createBottomTabNavigator();
 
@@ -18,10 +19,11 @@ function SettingScreen() {
 // todo
 // asyncStorage - getCategories ? new : selectCategories
 
-const isCategories = false;
+const isCategories = true;
 
 function BottomNavigator() {
-  return isCategories ? (
+  const {intro, changeState} = useContext(IntroContext);
+  return !intro ? (
     <SelectCategoryPage />
   ) : (
     <Tab.Navigator initialRouteName="News">
