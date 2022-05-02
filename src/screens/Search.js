@@ -15,7 +15,7 @@ function Search() {
   const handleEndLoading = e => {
     console.log('handleEndLoading');
     /** rn에서 웹뷰로 정보를 보내는 메소드 */
-    webviewRef.postMessage('로딩 완료시 webview로 정보를 보내는 곳');
+    webviewRef.postMessage(JSON.stringify({type: 'TEST', data: {a: 1, b: 2}}));
   };
 
   const handleOnMessage = ({nativeEvent: {data}}) => {
