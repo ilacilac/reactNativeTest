@@ -6,10 +6,11 @@ const categoriesStorage = {
   async get() {
     try {
       const rawCategories = await AsyncStorage.getItem(key);
-
-      if (!rawCategories) {
-        throw new Error('No saved categories');
-      }
+      const parsed = JSON.parse(rawCategories);
+      return parsed;
+      // if (!rawCategories) {
+      //   throw new Error('No saved categories');
+      // }
     } catch (e) {
       throw new Error('Failed to load categories');
     }
@@ -17,6 +18,13 @@ const categoriesStorage = {
   async set(data) {
     try {
       await AsyncStorage.setItem(key, JSON.stringify(data));
+    } catch (e) {
+      throw new Error();
+    }
+  },
+  async remove() {
+    try {
+      await AsyncStorage.removeItem(key);
     } catch (e) {
       throw new Error();
     }
