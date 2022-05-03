@@ -16,7 +16,8 @@ const Tab = createMaterialTopTabNavigator();
 function Tabs() {
   const {data, isLoading} = useQuery('config', getConfig);
   const {changeState} = useContext(IntroContext);
-  const gnb = data && Object.entries(data.gnb);
+
+  const gnb = data && Object.entries(data.gnb).sort();
 
   const removeStorage = () => {
     categoriesStorage.remove();
