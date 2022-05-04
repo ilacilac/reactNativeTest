@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {Text, TouchableOpacity} from 'react-native';
+import {Text, TouchableOpacity, StyleSheet} from 'react-native';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 
 import {IntroContext} from '../context/intro';
@@ -7,15 +7,18 @@ import {useQuery} from 'react-query';
 import {getConfig} from '../api/config';
 import categoriesStorage from '../storages/categoriesStorage';
 
-import List from '../screens/List';
-import Search from '../screens/Search';
-import Setting from '../screens/Setting';
+import List from '../components/List';
+import Search from '../screens/SearchScreen';
+import Setting from '../screens/SettingScreen';
+import {ThemeColorContext} from '../context/ThemeColorProvider';
+import styled from 'styled-components/native';
 
 const Tab = createMaterialTopTabNavigator();
 
 function Tabs() {
   const {data, isLoading} = useQuery('config', getConfig);
   const {changeState} = useContext(IntroContext);
+  const {colors} = useContext(ThemeColorContext);
 
   const gnb = data && Object.entries(data.gnb).sort();
 
@@ -43,7 +46,7 @@ function Tabs() {
           <Tab.Screen
             name={menu[1]}
             key={menu[0]}
-            children={() => <List code={menu[0]} />}
+            children={() => <List gnb={gnb} code={menu[0]} />}
           />
         ))}
       </Tab.Navigator>

@@ -33,7 +33,7 @@ const slides = [
   },
 ];
 
-function SelectCategoryPage() {
+function SelectCategoryScreen() {
   const {changeState} = useContext(IntroContext);
 
   const onDone = () => {
@@ -110,4 +110,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SelectCategoryPage;
+export default SelectCategoryScreen;
