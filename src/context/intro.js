@@ -1,4 +1,5 @@
 import React, {createContext, useState} from 'react';
+import categoriesStorage from '../storages/categoriesStorage';
 
 const IntroContext = createContext({
   intro: false,
@@ -9,6 +10,7 @@ const IntroProvider = ({children}) => {
   const [intro, setIntro] = useState(false);
   const changeState = () => {
     setIntro(!intro);
+    categoriesStorage.set(intro);
   };
 
   return (

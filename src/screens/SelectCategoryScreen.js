@@ -1,16 +1,7 @@
-import React, {useState, useContext} from 'react';
-import {
-  View,
-  Image,
-  Text,
-  SafeAreaView,
-  StyleSheet,
-  Button,
-} from 'react-native';
+import React, {useState, useContext, useEffect} from 'react';
+import {View, Image, Text, StyleSheet} from 'react-native';
 import {IntroContext} from '../context/intro';
 import AppIntroSlider from 'react-native-app-intro-slider';
-import Icon from 'react-native-ionicons';
-import News from './News';
 
 const slides = [
   {
@@ -42,21 +33,15 @@ const slides = [
   },
 ];
 
-function SelectCategoryPage() {
-  const [showRealApp, setShowRealApp] = useState(false);
+function SelectCategoryScreen() {
+  const {changeState} = useContext(IntroContext);
 
   const onDone = () => {
-    // setShowRealApp(true);
     changeState();
   };
   const onSkip = () => {
-    // setShowRealApp(true);
     changeState();
   };
-
-  const {intro, changeState} = useContext(IntroContext);
-
-  console.log('context', intro);
 
   const RenderItem = ({item}) => {
     return (
@@ -76,20 +61,14 @@ function SelectCategoryPage() {
   };
 
   return (
-    <>
-      {intro ? (
-        <News />
-      ) : (
-        <AppIntroSlider
-          data={slides}
-          renderItem={RenderItem}
-          onDone={onDone}
-          showSkipButton={true}
-          onSkip={onSkip}
-          bottomButton
-        />
-      )}
-    </>
+    <AppIntroSlider
+      data={slides}
+      renderItem={RenderItem}
+      onDone={onDone}
+      showSkipButton={true}
+      onSkip={onSkip}
+      bottomButton
+    />
   );
 }
 
@@ -131,4 +110,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SelectCategoryPage;
+export default SelectCategoryScreen;
