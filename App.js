@@ -5,22 +5,20 @@ import BottomNavigator from './src/navigation/BottomNavigator';
 import {QueryClientProvider, QueryClient} from 'react-query';
 import {IntroProvider} from './src/context/intro';
 import {ThemeColorProvider} from './src/context/ThemeColorProvider';
-// import RootStack from './src/screens/RootStack';
+import RootStack from './src/screens/RootStack';
 
 const queryClient = new QueryClient();
 
 export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <ThemeColorProvider>
-        <IntroProvider>
-          <NavigationContainer>
-            <SafeAreaView />
-            {/* <RootStack />r */}
-            <BottomNavigator />
-          </NavigationContainer>
-        </IntroProvider>
-      </ThemeColorProvider>
+      <NavigationContainer>
+        <ThemeColorProvider>
+          <IntroProvider>
+            <RootStack />
+          </IntroProvider>
+        </ThemeColorProvider>
+      </NavigationContainer>
     </QueryClientProvider>
   );
 }

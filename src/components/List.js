@@ -22,7 +22,7 @@ function List({code, gnb}) {
   return (
     <>
       <WebView
-        source={{uri: `http://localhost:3001/list/${code}`}}
+        source={{uri: `http://localhost:3000/list/${code}`}}
         // source={{url: `localhost:3000/${code}`}}
         onLoadEnd={() => webviewRef.postMessage(JSON.stringify(sendData))}
         onMessage={handleOnMessage}

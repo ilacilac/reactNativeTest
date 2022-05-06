@@ -1,4 +1,4 @@
-import {Text} from 'native-base';
+import {Text} from 'react-native';
 import React from 'react';
 
 function WriteScreen() {
