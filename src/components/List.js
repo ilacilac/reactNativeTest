@@ -18,8 +18,7 @@ function List({code, gnb}) {
 
   const handleOnMessage = ({nativeEvent: {data}}) => {
     // data에 웹뷰에서 보낸 값이 들어옵니다.
-    console.log('data', data);
-    navigation.navigate('Detail');
+    navigation.navigate('Detail', JSON.parse(data));
   };
 
   return (
