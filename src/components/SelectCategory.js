@@ -6,16 +6,17 @@ function SelectCategory({item}) {
   return (
     <View style={styles.SelectCategoryWrap}>
       <Text style={styles.SelectCategoryTitle}>{item.title}</Text>
-      {item.buttonImages.map(image => (
-        <TouchableOpacity style={styles.GenderBtn}>
-          <Text>{JSON.stringify(image)}</Text>
-          {/* <Image
-            source={require(`${image.buttonImage}`)}
-            resizeMode="contain"
-            style={styles.GenderBtnImage}
-          /> */}
-        </TouchableOpacity>
-      ))}
+      <View style={styles.GenderBtnWrap}>
+        {item.buttonImages.map((image, index) => (
+          <TouchableOpacity style={styles.GenderBtn} key={index}>
+            <Image
+              source={image.buttonImage}
+              resizeMode="contain"
+              style={styles.GenderBtnImage}
+            />
+          </TouchableOpacity>
+        ))}
+      </View>
       {/* <TouchableOpacity style={styles.GenderBtn}>
         <Image
           source={require('../assets/male.png')}
@@ -44,15 +45,21 @@ const styles = StyleSheet.create({
     marginTop: 150,
     fontWeight: 'bold',
   },
+  GenderBtnWrap: {
+    marginTop: 50,
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
   GenderBtn: {
-    flex: 1,
-    backgroundColor: '#ffffff',
     color: '#333333',
-    width: 50,
-    height: 50,
+    margin: 10,
+    width: 150,
+    height: 150,
   },
   GenderBtnImage: {
     display: 'flex',
+    width: 150,
+    height: 150,
   },
 });
 

@@ -8,14 +8,27 @@ import SelectCategory from '../components/SelectCategory';
 
 const slides = [
   {
-    key: 's1',
+    key: 'introCategory1',
     title: '당신의 성별은 무엇입니까?',
     buttonImages: [
       {
-        buttonImage: '../assets/male.png',
+        buttonImage: require('../assets/male.png'),
       },
       {
-        buttonImage: '../assets/female.png',
+        buttonImage: require('../assets/female.png'),
+      },
+    ],
+    backgroundColor: '#ffffff',
+  },
+  {
+    key: 'introCategory2',
+    title: '당신의 나이를 입력해주세요',
+    buttonImages: [
+      {
+        buttonImage: require('../assets/male.png'),
+      },
+      {
+        buttonImage: require('../assets/female.png'),
       },
     ],
     backgroundColor: '#ffffff',
