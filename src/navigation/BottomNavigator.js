@@ -4,13 +4,14 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Text, StatusBar, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import NewsScreen from '../screens/NewsScreen';
-import SelectCategoryScreen from '../screens/SelectCategoryScreen';
+
 import categoriesStorage from '../storages/categoriesStorage';
 import SettingScreen from '../screens/SettingScreen';
 
 import {IntroContext} from '../context/intro';
 import {ThemeColorContext} from '../context/ThemeColorProvider';
 import SearchScreen from '../screens/SearchScreen';
+import IntroScreen from '../screens/IntroScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -36,7 +37,7 @@ function BottomNavigator() {
   });
 
   return !category ? (
-    <SelectCategoryScreen />
+    <IntroScreen />
   ) : (
     <>
       <StatusBar barStyle={isDark ? 'light-content' : 'dark-content'} />
