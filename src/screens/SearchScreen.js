@@ -27,7 +27,7 @@ function SearchScreen({code}) {
   return (
     <>
       <WebView
-        source={{url: 'http://localhost:3000/list/123'}}
+        source={{url: 'http://localhost:3000/list'}}
         onLoadEnd={handleEndLoading}
         onMessage={handleOnMessage}
         ref={handleSetRef}
