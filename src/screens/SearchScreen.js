@@ -16,13 +16,7 @@ function SearchScreen({code}) {
   const handleEndLoading = e => {
     console.log('handleEndLoading');
     /** rn에서 웹뷰로 정보를 보내는 메소드 */
-    webviewRef.postMessage({
-      type: 'TEST_TYPE',
-      data: {
-        name: 'ming',
-        age: 20,
-      },
-    });
+    webviewRef.postMessage(JSON.stringify({type: 'TEST', data: {a: 1, b: 2}}));
   };
 
   const handleOnMessage = ({nativeEvent: {data}}) => {
@@ -33,8 +27,7 @@ function SearchScreen({code}) {
   return (
     <>
       <WebView
-        source={{url: 'https://www.naver.com/'}}
-        // source={{url: `localhost:3000/${code}`}}
+        source={{url: 'http://localhost:3000/list'}}
         onLoadEnd={handleEndLoading}
         onMessage={handleOnMessage}
         ref={handleSetRef}

@@ -10,12 +10,16 @@ function DetailScreen({route, navigation}) {
     data,
   };
 
-  console.log('data', data);
+  const handleOnMessage = ({nativeEvent: {data}}) => {
+    // data에 웹뷰에서 보낸 값이 들어옵니다.
+    console.log(data);
+  };
 
   return (
     <WebView
-      source={{uri: 'http://localhost:3000/post/123'}}
+      source={{uri: `http://localhost:3000/post`}}
       onLoadEnd={() => webviewRef.postMessage(JSON.stringify(sendData))}
+      onMessage={handleOnMessage}
       ref={ref => setWebviewRef(ref)}
     />
   );
