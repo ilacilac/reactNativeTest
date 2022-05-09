@@ -8,8 +8,8 @@ import {getConfig} from '../api/config';
 import categoriesStorage from '../storages/categoriesStorage';
 
 import List from '../components/List';
-import Search from '../screens/SearchScreen';
-import Setting from '../screens/SettingScreen';
+import SearchScreen from '../screens/SearchScreen';
+import SettingScreen from '../screens/SettingScreen';
 import {ThemeColorContext} from '../context/ThemeColorProvider';
 import styled from 'styled-components/native';
 
@@ -46,7 +46,7 @@ function Tabs() {
           <Tab.Screen
             name={menu[1]}
             key={menu[0]}
-            children={() => <List gnb={gnb} code={menu[0]} />}
+            children={() => <List codeName={menu[1]} code={menu[0]} />}
           />
         ))}
       </Tab.Navigator>
