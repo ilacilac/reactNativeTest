@@ -1,21 +1,24 @@
-import React from 'react';
-import {Text, View, StyleSheet, StatusBar} from 'react-native';
+import React, {useState} from 'react';
 import {WebView} from 'react-native-webview';
 // import {getStatusBarHeight} from 'react-native-status-bar-height';
 
 function DetailScreen({route, navigation}) {
   const {data} = route.params;
+  const [webviewRef, setWebviewRef] = useState(null);
+  const sendData = {
+    type: 'DETAIL_INIT',
+    data,
+  };
+
   console.log('data', data);
 
-  return <WebView source={{uri: 'http://localhost:3000/post/123'}} />;
+  return (
+    <WebView
+      source={{uri: 'http://localhost:3000/post/123'}}
+      onLoadEnd={() => webviewRef.postMessage(JSON.stringify(sendData))}
+      ref={ref => setWebviewRef(ref)}
+    />
+  );
 }
-
-const styles = StyleSheet.create({
-  // todo : theme color
-  detailWrap: {
-    // marginTop: getStatusBarHeight(),
-    marginTop: 10,
-  },
-});
 
 export default DetailScreen;

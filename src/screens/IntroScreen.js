@@ -41,11 +41,11 @@ function IntroScreen() {
 
   const onDone = () => {
     changeState();
-    navigation.navigate('SelectCategoryScreen');
+    // navigation.navigate('SelectCategoryScreen');
   };
   const onSkip = () => {
     changeState();
-    navigation.navigate('SelectCategoryScreen');
+    // navigation.navigate('SelectCategoryScreen');
   };
 
   const RenderItem = ({item}) => {
