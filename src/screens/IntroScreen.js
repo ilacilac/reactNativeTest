@@ -1,9 +1,11 @@
 import React, {useState, useContext, useEffect} from 'react';
-import {View, Image, Text, StyleSheet} from 'react-native';
-import {IntroContext} from '../context/intro';
+import {View, TouchableOpacity, Image, Text, StyleSheet} from 'react-native';
 import AppIntroSlider from 'react-native-app-intro-slider';
-import {useNavigation} from '@react-navigation/native';
-import IntroSlide from '../components/IntroSlide';
+import {
+  createNavigationContainerRef,
+  useNavigation,
+} from '@react-navigation/native';
+import IntroSlide from '../components/Intro/IntroSlide';
 
 const slides = [
   {
@@ -35,21 +37,14 @@ const slides = [
   },
 ];
 
-function IntroScreen() {
-  const {changeState} = useContext(IntroContext);
+function IntroScreen({data}) {
   const navigation = useNavigation();
 
-  const onDone = () => {
-    changeState();
-    // navigation.navigate('SelectCategoryScreen');
-  };
-  const onSkip = () => {
-    changeState();
-    // navigation.navigate('SelectCategoryScreen');
+  const onMove = () => {
+    navigation.navigate('InitSettingScreen');
   };
 
   const RenderItem = ({item}) => {
-    console.log('item', item);
     return <IntroSlide item={item} />;
   };
 
@@ -57,9 +52,9 @@ function IntroScreen() {
     <AppIntroSlider
       data={slides}
       renderItem={RenderItem}
-      onDone={onDone}
+      onDone={onMove}
+      onSkip={onMove}
       showSkipButton={true}
-      onSkip={onSkip}
       bottomButton
     />
   );

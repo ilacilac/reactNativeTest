@@ -10,8 +10,6 @@ function DetailScreen({route, navigation}) {
     data,
   };
 
-  console.log('data', data);
-
   return (
     <WebView
       source={{uri: 'http://localhost:3000/post/123'}}

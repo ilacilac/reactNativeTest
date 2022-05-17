@@ -10,8 +10,6 @@ function List({code, codeName}) {
   const [webviewRef, setWebviewRef] = useState(null);
   const navigation = useNavigation();
 
-  console.log(code, codeName);
-
   const sendData = {
     type: 'LIST_INIT',
     data: {

@@ -34,22 +34,23 @@ function Tabs() {
 
   return (
     <>
-      <TouchableOpacity onPress={() => removeStorage()}>
-        <Text>Remove Storage</Text>
-      </TouchableOpacity>
-      <Tab.Navigator
-        screenOptions={{
-          tabBarScrollEnabled: true,
-          tabBarItemStyle: {width: 77},
-        }}>
-        {gnb.map(menu => (
-          <Tab.Screen
-            name={menu[1]}
-            key={menu[0]}
-            children={() => <List codeName={menu[1]} code={menu[0]} />}
-          />
-        ))}
-      </Tab.Navigator>
+      {/*<TouchableOpacity onPress={() => removeStorage()}>*/}
+      {/*  <Text>Remove Storage</Text>*/}
+      {/*</TouchableOpacity>*/}
+      {/*<Tab.Navigator*/}
+      {/*  screenOptions={{*/}
+      {/*    tabBarScrollEnabled: true,*/}
+      {/*    tabBarItemStyle: {width: 77},*/}
+      {/*  }}>*/}
+      {/*  {gnb.map(menu => (*/}
+      {/*    <Tab.Screen*/}
+      {/*      name={menu[1]}*/}
+      {/*      key={menu[0]}*/}
+      {/*      children={() => <List codeName={menu[1]} code={menu[0]} />}*/}
+      {/*    />*/}
+      {/*  ))}*/}
+      {/*</Tab.Navigator>*/}
+      <Text>Tabs</Text>
     </>
   );
 }
