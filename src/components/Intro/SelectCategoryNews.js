@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import {
   View,
   TouchableOpacity,
@@ -113,14 +113,47 @@ const conf = {
 };
 
 function SelectCategoryNews() {
+  const [alertMessage, setAlertMessage] = useState(false);
+  const [checkedNews, setCheckedNews] = useState({});
   const {
     setting: {
       config: {oid},
     },
   } = useContext(SettingContext);
+  const oidArray = Object.entries(oid).sort(([key1], [key2]) => +key1 - +key2);
 
-  const onPress = menu => {
-    console.log(menu);
+  // TODO
+  // 높이값
+  // Array로 구조 잡을지 Object 잡을지 확인 - Object
+  // Checker : 3개 이상 체크할경우 / 3개 이하 체크할 경우 / 같은걸 체크할 경우 / 같은걸 체크하지 않을경우
+  // 고려사항 : asyncStorage에서 체크된 값 가져오기 (재사용성 고려 - 지금은 아님 -> 아직 확정된 사항이 없음)
+  // Toggle 형식 뺏다가 넣었다가
+  const isChecked = key => {
+    return !!checkedNews[key];
+  };
+
+  // 부등호
+  //
+  const onRemove = key => {
+    const newCheckedNews = {...checkedNews};
+    delete newCheckedNews[key];
+    setCheckedNews(newCheckedNews);
+  };
+
+  const onAdd = menu => {
+    const newCheckedNews = {...checkedNews};
+    setCheckedNews({...newCheckedNews, ...menu});
+  };
+
+  const onPress = (menu, key) => {
+    if (isChecked(key)) {
+      onRemove(key);
+    } else {
+      if (Object.keys(checkedNews).length < 3) {
+        onAdd(menu);
+      }
+      return false;
+    }
   };
 
   return (
@@ -132,18 +165,31 @@ function SelectCategoryNews() {
           flexWrap: 'wrap',
           flexDirection: 'row',
         }}>
-        {Object.entries(oid)
-          .sort(([key1], [key2]) => +key1 - +key2)
-          .map(([key, value]) => {
-            return (
-              <TouchableOpacity
-                key={key}
-                style={styles.buttonTextWrap}
-                onPress={() => onPress(value)}>
-                <Text style={styles.buttonText}>{value}</Text>
-              </TouchableOpacity>
-            );
-          })}
+        <Text style={styles.selectCategoryTitle}>
+          선호하는 언론사를 3개 선택해주세요
+        </Text>
+        <Text>{JSON.stringify(checkedNews)}</Text>
+        {oidArray.map(([key, value]) => {
+          return (
+            <TouchableOpacity
+              key={key}
+              style={
+                Object.keys(checkedNews).some(_key => _key === key)
+                  ? styles.buttonTextWrapSelected
+                  : styles.buttonTextWrap
+              }
+              onPress={() => onPress({[key]: value}, key)}>
+              <Text
+                style={
+                  Object.keys(checkedNews).some(_key => _key === key)
+                    ? styles.buttonTextSelected
+                    : styles.buttonText
+                }>
+                {value}
+              </Text>
+            </TouchableOpacity>
+          );
+        })}
       </ScrollView>
     </View>
   );
@@ -152,11 +198,14 @@ function SelectCategoryNews() {
 const styles = StyleSheet.create({
   selectCategoryWrap: {
     marginTop: getStatusBarHeight(),
+    paddingTop: 30,
+    paddingBottom: 140,
   },
   selectCategoryTitle: {
     textAlign: 'center',
     fontSize: 24,
-    marginTop: 120,
+    marginTop: 20,
+    marginBottom: 20,
     fontWeight: 'bold',
   },
   genderBtnWrap: {
@@ -181,7 +230,17 @@ const styles = StyleSheet.create({
   doneBtn: {
     backgroundColor: '#999999',
   },
-
+  buttonTextWrapSelected: {
+    width: '30%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 10,
+    paddingTop: 15,
+    paddingBottom: 15,
+    backgroundColor: '#238e80',
+    // borderWidth: 3,
+    // borderColor: '#333',
+  },
   buttonTextWrap: {
     width: '30%',
     justifyContent: 'center',
@@ -193,6 +252,10 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 15,
+  },
+  buttonTextSelected: {
+    fontSize: 15,
+    color: '#fff',
   },
 });
 
