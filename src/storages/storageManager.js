@@ -5,8 +5,7 @@ const storageManager = {
     if (key) {
       try {
         const result = await AsyncStorage.getItem(key);
-        const parsed = JSON.parse(result);
-        return parsed;
+        return result;
       } catch (e) {
         throw new Error(`Failed to get ${key} storage`);
       }
@@ -14,8 +13,7 @@ const storageManager = {
       try {
         const keys = await AsyncStorage.getAllKeys();
         const result = await AsyncStorage.multiGet(keys);
-        const parse = result.reduce((all, [k, v]) => ({...all, [k]: v}), null);
-        return parse;
+        return result;
       } catch (e) {
         throw new Error('Failed to get all storages');
       }
