@@ -1,16 +1,11 @@
-import React, {useState, useContext} from 'react';
-import {
-  View,
-  Image,
-  Text,
-  SafeAreaView,
-  StyleSheet,
-  Button,
-} from 'react-native';
-import {IntroContext} from '../context/intro';
+import React, {useState, useContext, useEffect} from 'react';
+import {View, TouchableOpacity, Image, Text, StyleSheet} from 'react-native';
 import AppIntroSlider from 'react-native-app-intro-slider';
-import Icon from 'react-native-ionicons';
-import News from './News';
+import {
+  createNavigationContainerRef,
+  useNavigation,
+} from '@react-navigation/native';
+import IntroSlide from '../components/Intro/IntroSlide';
 
 const slides = [
   {
@@ -42,54 +37,26 @@ const slides = [
   },
 ];
 
-function SelectCategoryPage() {
-  const [showRealApp, setShowRealApp] = useState(false);
+function IntroScreen({data}) {
+  const navigation = useNavigation();
 
-  const onDone = () => {
-    // setShowRealApp(true);
-    changeState();
+  const onMove = () => {
+    navigation.navigate('InitSettingScreen');
   };
-  const onSkip = () => {
-    // setShowRealApp(true);
-    changeState();
-  };
-
-  const {intro, changeState} = useContext(IntroContext);
-
-  console.log('context', intro);
 
   const RenderItem = ({item}) => {
-    return (
-      <View
-        style={{
-          flex: 1,
-          backgroundColor: item.backgroundColor,
-          alignItems: 'center',
-          justifyContent: 'space-around',
-          paddingBottom: 100,
-        }}>
-        <Text style={styles.introTitleStyle}>{item.title}</Text>
-        <Image style={styles.introImageStyle} source={item.image} />
-        <Text style={styles.introTextStyle}>{item.text}</Text>
-      </View>
-    );
+    return <IntroSlide item={item} />;
   };
 
   return (
-    <>
-      {intro ? (
-        <News />
-      ) : (
-        <AppIntroSlider
-          data={slides}
-          renderItem={RenderItem}
-          onDone={onDone}
-          showSkipButton={true}
-          onSkip={onSkip}
-          bottomButton
-        />
-      )}
-    </>
+    <AppIntroSlider
+      data={slides}
+      renderItem={RenderItem}
+      onDone={onMove}
+      onSkip={onMove}
+      showSkipButton={true}
+      bottomButton
+    />
   );
 }
 
@@ -131,4 +98,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SelectCategoryPage;
+export default IntroScreen;

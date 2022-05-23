@@ -1,21 +1,19 @@
 import React from 'react';
-import {SafeAreaView} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
-import BottomNavigator from './src/navigation/BottomNavigator';
 import {QueryClientProvider, QueryClient} from 'react-query';
-import {IntroProvider} from './src/context/intro';
+import {SettingProvider} from './src/context/SettingProvider';
+import RootScreen from './src/screens/RootScreen';
 
 const queryClient = new QueryClient();
 
 export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <IntroProvider>
-        <NavigationContainer>
-          <SafeAreaView />
-          <BottomNavigator />
-        </NavigationContainer>
-      </IntroProvider>
+      <NavigationContainer>
+        <SettingProvider>
+          <RootScreen />
+        </SettingProvider>
+      </NavigationContainer>
     </QueryClientProvider>
   );
 }

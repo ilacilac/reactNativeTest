@@ -1,7 +1,7 @@
 import React, {useRef} from 'react';
 import {WebView} from 'react-native-webview';
 
-function Search({code}) {
+function SearchScreen({code}) {
   console.log('code', code);
   // 웹뷰와 rn과의 소통은 아래의 ref 값을 이용하여 이루어집니다.
   // https://kyounghwan01.github.io/blog/React/react-native/react-native-webview/#rn%E1%84%8B%E1%85%A6%E1%84%89%E1%85%A5-webview%E1%84%85%E1%85%A9-%E1%84%83%E1%85%A6%E1%84%8B%E1%85%B5%E1%84%90%E1%85%A5-%E1%84%89%E1%85%A9%E1%86%BC%E1%84%89%E1%85%B5%E1%86%AB
@@ -16,13 +16,7 @@ function Search({code}) {
   const handleEndLoading = e => {
     console.log('handleEndLoading');
     /** rn에서 웹뷰로 정보를 보내는 메소드 */
-    webviewRef.postMessage({
-      type: 'TEST_TYPE',
-      data: {
-        name: 'ming',
-        age: 20,
-      },
-    });
+    webviewRef.postMessage(JSON.stringify({type: 'TEST', data: {a: 1, b: 2}}));
   };
 
   const handleOnMessage = ({nativeEvent: {data}}) => {
@@ -33,8 +27,7 @@ function Search({code}) {
   return (
     <>
       <WebView
-        source={{url: 'https://www.naver.com/'}}
-        // source={{url: `localhost:3000/${code}`}}
+        source={{url: 'http://localhost:3000/list'}}
         onLoadEnd={handleEndLoading}
         onMessage={handleOnMessage}
         ref={handleSetRef}
@@ -43,4 +36,4 @@ function Search({code}) {
   );
 }
 
-export default Search;
+export default SearchScreen;
