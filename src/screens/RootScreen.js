@@ -25,8 +25,7 @@ function RootScreen() {
   //     storageManager.set('c', 1);
   //   }
   // }, []);
-
-  console.log(setting?.storages);
+  // console.log(setting?.storages);
 
   // TODO initialRouteName
   return !setting ? (

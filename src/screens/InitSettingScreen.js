@@ -1,15 +1,11 @@
-import React, {useState, useRef, useContext, useEffect} from 'react';
-import {View, TouchableOpacity, Image, Text, StyleSheet} from 'react-native';
-import {IntroContext} from '../context/intro';
+import React, {useState} from 'react';
+import {Text, StyleSheet} from 'react-native';
 import AppIntroSlider from 'react-native-app-intro-slider';
 import {useNavigation} from '@react-navigation/native';
-import IntroSlide from '../components/Intro/IntroSlide';
-import SelectCategory from '../components/Intro/SelectCategory';
-import {useQuery} from 'react-query';
-import {getConfig} from '../api/config';
 import SelectCategoryNews from '../components/Intro/SelectCategoryNews';
 import SelectCategoryGender from '../components/Intro/SelectCategoryGender';
 import SelectCategoryAge from '../components/Intro/SelectCategoryAge';
+import storageManager from '../storages/storageManager';
 
 // TODO
 // app 첫페이지 - 값들 받아주기 - loading / intro
@@ -17,48 +13,55 @@ import SelectCategoryAge from '../components/Intro/SelectCategoryAge';
 
 function InitSettingScreen() {
   const navigation = useNavigation();
+  const [setting, setSetting] = useState({});
 
   /*
     TODO
       1. useState -> default value setting
       2. contextAPI -> value setting
    */
+  const onSettingChange = (key, value) => {
+    const newSetting = {
+      ...setting,
+      [key]: value,
+    };
+
+    setSetting(newSetting);
+  };
 
   const slides = [
     {
       key: 'introCategory1',
-      component: <SelectCategoryGender />,
+      component: <SelectCategoryGender onSettingChange={onSettingChange} />,
     },
     {
       key: 'introCategory2',
-      component: <SelectCategoryAge />,
+      component: <SelectCategoryAge onSettingChange={onSettingChange} />,
     },
     {
       key: 'introCategory3',
-      component: <SelectCategoryNews />,
+      component: <SelectCategoryNews onSettingChange={onSettingChange} />,
     },
   ];
 
   const onSkip = () => {
     navigation.navigate('MainScreen');
   };
-
-  const onDone = () => {
+  const onDone = async () => {
+    await storageManager.set('init', setting);
     navigation.navigate('MainScreen');
   };
 
-  const renderNextButton = props => {
+  const keyExtractor = item => item.key;
+  const renderNextButton = () => {
     return <Text style={styles.nextBtn}>Next</Text>;
   };
-
   const renderDoneButton = () => {
     return <Text style={styles.doneBtn}>Done</Text>;
   };
   const renderSkipButton = () => {
     return <Text style={styles.skipBtn}>Skip</Text>;
   };
-
-  const keyExtractor = item => item.key;
 
   return (
     <AppIntroSlider

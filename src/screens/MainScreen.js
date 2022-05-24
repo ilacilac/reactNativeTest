@@ -2,6 +2,8 @@ import React, {useContext, useEffect, useState} from 'react';
 
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Text, StatusBar, StyleSheet} from 'react-native';
+import storageManager from '../storages/storageManager';
+import {SettingContext} from '../context/SettingProvider';
 // import Icon from 'react-native-vector-icons/MaterialIcons';
 // import NewsScreen from '../screens/NewsScreen';
 //
@@ -19,12 +21,15 @@ const Tab = createBottomTabNavigator();
 // 이곳에서 intro로 판별하기보다는 상위로 옮기는 방향
 
 function MainScreen() {
+  const test = useContext(SettingContext);
   // const {isDark, colors, setScheme} = useContext(ThemeColorContext);
   // const styles = StyleSheet.create({
   //   tabMenu: {
   //     backgroundColor: colors.background,
   //   },
   // });
+
+  console.log(test);
 
   return (
     // <>

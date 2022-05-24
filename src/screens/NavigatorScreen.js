@@ -2,7 +2,6 @@ import React, {useContext} from 'react';
 import {Text} from 'react-native';
 
 function NavigatorScreen({setting}) {
-  console.log(setting);
   return <Text>NavigatorScreen</Text>;
 }
 

@@ -10,13 +10,19 @@ import {
 import {Picker} from '@react-native-picker/picker';
 import {getStatusBarHeight} from 'react-native-status-bar-height';
 
-function SelectCategoryAge({item}) {
-  const [selectedValue, setSelectedValue] = useState(20);
+function SelectCategoryAge({onSettingChange}) {
+  const [selectedValue, setSelectedValue] = useState();
   const pickerRef = useRef();
-  const ageRange = new Array(100).fill(0);
+
   const onValueChange = itemValue => {
     setSelectedValue(itemValue);
-    console.log(itemValue);
+    onSettingChange('age', itemValue);
+  };
+
+  const renderItem = () => {
+    return [...Array(100)].map((_, index) => (
+      <Picker.Item key={index} label={`${index}`} value={index} />
+    ));
   };
 
   return (
@@ -29,9 +35,7 @@ function SelectCategoryAge({item}) {
         mode="dialog"
         selectedValue={selectedValue}
         onValueChange={onValueChange}>
-        {ageRange.map((_, index) => (
-          <Picker.Item label={index.toString()} value={index} key={index} />
-        ))}
+        {renderItem()}
       </Picker>
     </View>
   );

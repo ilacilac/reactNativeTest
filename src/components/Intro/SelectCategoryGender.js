@@ -3,9 +3,9 @@ import {View, TouchableOpacity, Image, Text, StyleSheet} from 'react-native';
 import {getStatusBarHeight} from 'react-native-status-bar-height';
 
 // todos: page 3개로 분리
-function SelectCategoryGender({test}) {
+function SelectCategoryGender({onSettingChange}) {
   const onPress = value => {
-    console.log('value', value);
+    onSettingChange('gender', value);
   };
 
   return (

@@ -14,8 +14,8 @@ function SettingProvider({children}) {
       storageManager.get(),
       getConfig(),
     ]);
-    console.log('storages, config', storages, config);
 
+    // storageManager.remove();
     const newStorages = storages.reduce(
       (all, [k, v]) => ({...all, [k]: v}),
       null,
@@ -28,9 +28,7 @@ function SettingProvider({children}) {
       }),
       null,
     );
-
-    console.log(JSON.stringify({storages: newStorages, config: newConfig}));
-
+    // TODO : 데이터 형태가 어떤식으로 들어가는지 주석형태 필요
     setSetting({storages: newStorages, config: newConfig});
   };
 
