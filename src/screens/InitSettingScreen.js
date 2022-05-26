@@ -6,10 +6,11 @@ import SelectCategoryNews from '../components/Intro/SelectCategoryNews';
 import SelectCategoryGender from '../components/Intro/SelectCategoryGender';
 import SelectCategoryAge from '../components/Intro/SelectCategoryAge';
 import storageManager from '../storages/storageManager';
+import {useDispatch, useSelector} from 'react-redux';
+import {userSettingsAdd} from '../modules/userSettings';
 
 // TODO
-// app 첫페이지 - 값들 받아주기 - loading / intro
-// intro - SelectPage
+// useContext -> redux
 
 function InitSettingScreen() {
   const navigation = useNavigation();
@@ -43,12 +44,13 @@ function InitSettingScreen() {
       component: <SelectCategoryNews onSettingChange={onSettingChange} />,
     },
   ];
+  const dispatch = useDispatch();
 
   const onSkip = () => {
     navigation.navigate('MainScreen');
   };
-  const onDone = async () => {
-    await storageManager.set('init', setting);
+  const onDone = () => {
+    dispatch(userSettingsAdd(setting));
     navigation.navigate('MainScreen');
   };
 

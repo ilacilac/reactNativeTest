@@ -16,6 +16,11 @@ function SettingProvider({children}) {
     ]);
 
     // storageManager.remove();
+    // 검수* / 검색 / 필터버튼(언론사선택 & 나이 & 성별수정)
+    // const 북마크 = [] / 키값 스토리지 / 웹뷰 -> ["asdasd", "asdas"]
+    // setting : bookmark / 추천재설정
+    // 보류 : (setting - 다크 / 글자)
+
     const newStorages = storages.reduce(
       (all, [k, v]) => ({...all, [k]: v}),
       null,

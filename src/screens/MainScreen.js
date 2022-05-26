@@ -4,6 +4,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Text, StatusBar, StyleSheet} from 'react-native';
 import storageManager from '../storages/storageManager';
 import {SettingContext} from '../context/SettingProvider';
+import {useSelector} from 'react-redux';
 // import Icon from 'react-native-vector-icons/MaterialIcons';
 // import NewsScreen from '../screens/NewsScreen';
 //
@@ -17,11 +18,10 @@ import {SettingContext} from '../context/SettingProvider';
 
 const Tab = createBottomTabNavigator();
 
-// todo
-// 이곳에서 intro로 판별하기보다는 상위로 옮기는 방향
-
 function MainScreen() {
-  const test = useContext(SettingContext);
+  const {userSettings} = useSelector(({userSettings}) => ({
+    userSettings,
+  }));
   // const {isDark, colors, setScheme} = useContext(ThemeColorContext);
   // const styles = StyleSheet.create({
   //   tabMenu: {
@@ -29,8 +29,16 @@ function MainScreen() {
   //   },
   // });
 
-  console.log(test);
+  useEffect(() => {
+    (async () => {
+      await storageManager.set('init', userSettings);
+    })();
+  }, [userSettings]);
 
+  console.log('intro', userSettings);
+  console.log('getAsyncStorage', storageManager.get());
+
+  // console.log('!! userSettings', userSettings);
   return (
     // <>
     //   <StatusBar barStyle={isDark ? 'light-content' : 'dark-content'} />

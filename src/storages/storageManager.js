@@ -13,6 +13,16 @@ const storageManager = {
       try {
         const keys = await AsyncStorage.getAllKeys();
         const result = await AsyncStorage.multiGet(keys);
+
+        AsyncStorage.getAllKeys((_err, _keys) => {
+          AsyncStorage.multiGet(_keys, (error, stores) => {
+            stores.map((_result, i, store) => {
+              console.log('ASYNCSTORAGE : ', {[store[i][0]]: store[i][1]});
+              return true;
+            });
+          });
+        });
+
         return result;
       } catch (e) {
         throw new Error('Failed to get all storages');
